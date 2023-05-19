@@ -33,7 +33,7 @@ numberKeys.forEach((key) => {
     }
 
     // CASE: input number has a limit of 22 digits // clearTimeout for alert???? limit formula length????
-    if (input.length === 22) return alert("DIGIT LIMIT MET");
+    if (input.length === 22) return customAlert("DIGIT LIMIT MET");
 
     // New digit is added to the end of input string
     input = input.concat(key.innerHTML);

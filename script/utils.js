@@ -20,3 +20,10 @@ const parseFormulaForCalculation = (formula) => {
 const calculate = (formula) => {
   return Math.round(1e10 * eval(parseFormulaForCalculation(formula))) / 1e10;
 };
+
+const customAlert = (message) => {
+  resultDisplay.innerHTML = message;
+  setTimeout(() => {
+    resultDisplay.innerHTML = input;
+  }, 1000);
+};
