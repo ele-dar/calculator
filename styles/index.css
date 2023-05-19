@@ -1,0 +1,96 @@
+:root {
+  /* Base colors */
+  --clr-primary: #4d4d4d;
+  --clr-secondary: #666666;
+  --clr-highlight-primary: #ac3939;
+  --clr-highlight-secondary: #004466;
+  --clr-bckg-main: #c2c2d6;
+  --clr-bckg-calculator: #000000;
+  --clr-outline-primary: #47476b;
+  --clr-outline-secondary: #808080;
+  --clr-text: #ffffff;
+  --clr-text-inverted: #000000;
+  --clr-text-highlight: #ffa500;
+
+  /* Typography */
+  --text-m: 20px;
+  --text-l: 28px;
+}
+
+/* Background */
+body {
+  background-color: var(--clr-bckg-main);
+}
+
+main {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+/* Calculator */
+.calculator {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: auto repeat(5, 65px);
+  grid-gap: 1px;
+  padding: 5px;
+  border: 2px solid var(--clr-outline-primary);
+  background-color: var(--clr-bckg-calculator);
+  color: var(--clr-text);
+  font-size: var(--text-m);
+  line-height: 1;
+}
+
+/* Display */
+.display {
+  grid-area: 1 / 1 / 2 / 5;
+  padding-bottom: 5px;
+  font-family: "DS-Digital", sans-serif;
+  text-align: end;
+}
+
+.display-formula {
+  min-height: var(--text-m);
+  color: var(--clr-text-highlight);
+  word-break: break-all;
+}
+
+.display-result {
+  font-size: var(--text-l);
+}
+
+/* Keys */
+.key {
+  font-family: "Share Tech Mono", monospace;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-primary);
+}
+
+.key:hover {
+  outline: 1px solid var(--clr-outline-secondary);
+  color: var(--clr-text-inverted);
+}
+
+/* Key sizes */
+.key-wide {
+  grid-column: span 2;
+}
+
+.key-high {
+  grid-row: span 2;
+}
+
+/* Key colors */
+.key-operation {
+  background-color: var(--clr-secondary);
+}
+
+.key-clear {
+  background-color: var(--clr-highlight-primary);
+}
+
+.key-equals {
+  background-color: var(--clr-highlight-secondary);
+}
