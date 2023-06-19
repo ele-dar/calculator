@@ -1,27 +1,30 @@
-const select = (selector) => document.querySelector(selector);
-const selectAll = (selector) => Array.from(document.querySelectorAll(selector));
+import { resultDisplay } from "./selectors.js";
 
-const addNewInputToFormula = (formula, input) => [...formula, input];
+export const select = (selector) => document.querySelector(selector);
+export const selectAll = (selector) =>
+  Array.from(document.querySelectorAll(selector));
 
-const updateLastFormulaInput = (formula, input) => {
+export const addNewInputToFormula = (formula, input) => [...formula, input];
+
+export const updateLastFormulaInput = (formula, input) => {
   formula.pop();
   formula.push(input);
   return formula;
 };
 
-const parseFormulaForDisplay = (formula) => {
+export const parseFormulaForDisplay = (formula) => {
   return formula.join("").replace("x", "&#183;");
 };
 
-const parseFormulaForCalculation = (formula) => {
+export const parseFormulaForCalculation = (formula) => {
   return formula.join("").replace("x", "*").replace("--", "+");
 };
 
-const calculate = (formula) => {
+export const calculate = (formula) => {
   return Math.round(1e10 * eval(parseFormulaForCalculation(formula))) / 1e10;
 };
 
-const customAlert = (message) => {
+export const displayAlert = (message, input) => {
   resultDisplay.innerHTML = message;
   setTimeout(() => {
     resultDisplay.innerHTML = input;

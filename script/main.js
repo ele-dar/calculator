@@ -1,15 +1,19 @@
-const resultDisplay = select(".display-result");
-const formulaDisplay = select(".display-formula");
-const keys = selectAll(".key");
-const numberKeys = keys.filter(
-  (key) =>
-    !key.classList.contains(["key-clear"]) &&
-    !key.classList.contains(["key-equals"]) &&
-    !key.classList.contains(["key-operation"])
-);
-const operationKeys = selectAll(".key-operation");
-const clearKey = select(".key-clear");
-const equalsKey = select(".key-equals");
+import {
+  resultDisplay,
+  formulaDisplay,
+  numberKeys,
+  operationKeys,
+  equalsKey,
+  clearKey,
+} from "./selectors.js";
+import {
+  addNewInputToFormula,
+  updateLastFormulaInput,
+  parseFormulaForDisplay,
+  parseFormulaForCalculation,
+  calculate,
+  displayAlert,
+} from "./utils.js";
 
 let input = "";
 let formula = [];
@@ -24,7 +28,7 @@ numberKeys.forEach((key) => {
     if (key.innerHTML === "0" && input === "0") return;
 
     if (key.innerHTML === ".") {
-      // CASE: number is not allowed to have multiple decimal pints
+      // CASE: number is not allowed to have multiple decimal points
       if (input.indexOf(".") !== -1) return;
       // CASE: if user starts input with decimal point, a zero is added before it
       if (input === "") {
@@ -32,14 +36,14 @@ numberKeys.forEach((key) => {
       }
     }
 
-    // CASE: input number has a limit of 22 digits // clearTimeout for alert???? limit formula length????
-    if (input.length === 22) return customAlert("DIGIT LIMIT MET");
+    // CASE: input number has a limit of 22 digits
+    if (input.length === 22) return displayAlert("DIGIT LIMIT MET", input);
 
     // New digit is added to the end of input string
     input = input.concat(key.innerHTML);
 
     // CASE: number is not allowed to begin with a zero if it is not followed by a decimal point
-    if (input.length > 1 && input[0] === "0" && input[1] !== ".") {
+    if (input.length === 2 && input[0] === "0" && input[1] !== ".") {
       input = input.slice(1);
     }
 
@@ -65,7 +69,7 @@ operationKeys.forEach((key) => {
       formula.push("0");
     }
 
-    // CASE: if last key clicked before the operation key was not another operation - the operator is pushed to the formula otherwise it is updated (line 96)
+    // CASE: if last key clicked before the operation key was not another operation - the operator is pushed to the formula otherwise it is updated
     if (!isOperationKeyClicked) {
       input = key.innerHTML;
       formula.push(input);
